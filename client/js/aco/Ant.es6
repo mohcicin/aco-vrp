@@ -39,11 +39,11 @@ class Ant {
     //stang add this
     this.walk.push(this.walk[0])
     console.log([this.walk.length,this.walk])
-    // if(this.walk[distances.length + this.numCar - 2] == this.base){
-    //   return ;
+    // if(this.walk[distances.length + this.numCar - 2] == 0){
+    //   this.walk.push(this.walk[0])
     // }
     try{
-      this.walkLength = this.calculateWalkLength(distances);
+       this.walkLength = this.calculateWalkLength(distances);
     }catch(er){}
 
   }
@@ -53,7 +53,7 @@ class Ant {
     let unvisited = [];
 
    ( count < this.numCar - 1  &&  currentNode !== this.walk[0] ) ? unvisited.push(0) : unvisited = [];
-    for(let i = 1; i < distances.length + + this.numCar - 1; i++) {
+    for(let i = 1; i < distances.length +  this.numCar - 1; i++) {
      if (this.walk.indexOf(i) === -1 ) {
         unvisited.push(i);
        
