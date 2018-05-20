@@ -7,6 +7,7 @@ class Ant {
     this.base = 0;
     this.walk = [];
     this.walkLength = null;
+    this.numCar = 3;
   }
 
   /**
@@ -30,22 +31,29 @@ class Ant {
     this.walkLength = null;
     let count = 0;
 
-    for(let i = 1; i < distances.length; i++) {
+    for(let i = 1; i < distances.length + this.numCar - 1; i++) {
       let next =  this.chooseNext(this.walk[i - 1], distances, pheromones,count);
-      if(next === 0 ){count++; console.log(count);}
+      if(next === 0 ){count++;}
       this.walk.push(next);
      }
     //stang add this
-    if(this.walk[this.walk.length - 1] !== this.walk[0]) { this.walk.push(this.walk[0])}
-    this.walkLength = this.calculateWalkLength(distances);
+    this.walk.push(this.walk[0])
+    console.log([this.walk.length,this.walk])
+    // if(this.walk[distances.length + this.numCar - 2] == this.base){
+    //   return ;
+    // }
+    try{
+      this.walkLength = this.calculateWalkLength(distances);
+    }catch(er){}
+
   }
  
   chooseNext(currentNode, distances, pheromones,count) {
     let sumall = 0;
     let unvisited = [];
 
-   ( count === 0 ) ? unvisited.push(0) : unvisited = [];
-    for(let i = 1; i < distances.length; i++) {
+   ( count < this.numCar - 1  &&  currentNode !== this.walk[0] ) ? unvisited.push(0) : unvisited = [];
+    for(let i = 1; i < distances.length + + this.numCar - 1; i++) {
      if (this.walk.indexOf(i) === -1 ) {
         unvisited.push(i);
        
