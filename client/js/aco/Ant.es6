@@ -42,9 +42,12 @@ class Ant {
     // if(this.walk[distances.length + this.numCar - 2] == 0){
     //   this.walk.push(this.walk[0])
     // }
-    try{
-       this.walkLength = this.calculateWalkLength(distances);
-    }catch(er){}
+    this.walkLength = this.calculateWalkLength(distances);
+    // try{
+    //    this.walkLength = this.calculateWalkLength(distances);
+    // }catch(err){
+    //   this.walkLength = 999999
+    // }
 
   }
  
@@ -52,8 +55,9 @@ class Ant {
     let sumall = 0;
     let unvisited = [];
 
-   ( count < this.numCar - 1  &&  currentNode !== this.walk[0] ) ? unvisited.push(0) : unvisited = [];
-    for(let i = 1; i < distances.length +  this.numCar - 1; i++) {
+    // ( count < this.numCar - 1  &&  currentNode !== this.walk[0] ) ? unvisited.push(0) : unvisited = [];
+   ( count < this.numCar - 1 ) ? unvisited.push(0) : unvisited = [];
+    for(let i = 1; i < distances.length ; i++) {
      if (this.walk.indexOf(i) === -1 ) {
         unvisited.push(i);
        
@@ -89,7 +93,6 @@ class Ant {
   calculateWalkLength(distances) {
     let len = 0;
     for(let i = 1; i < this.walk.length; i++) {
-      
       len += distances[this.walk[i-1]][this.walk[i]];
     }
     
