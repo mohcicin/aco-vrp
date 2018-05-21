@@ -38,7 +38,7 @@ class Ant {
      }
     //stang add this
     this.walk.push(this.walk[0])
-    console.log([this.walk.length,this.walk])
+    //console.log([this.walk.length,this.walk])
     // if(this.walk[distances.length + this.numCar - 2] == 0){
     //   this.walk.push(this.walk[0])
     // }
@@ -91,12 +91,24 @@ class Ant {
   }
 
   calculateWalkLength(distances) {
-    let len = 0;
-    for(let i = 1; i < this.walk.length; i++) {
-      len += distances[this.walk[i-1]][this.walk[i]];
-    }
+    // let len = 0;
+    // for(let i = 1; i < this.walk.length; i++) {
+    //   len += distances[this.walk[i-1]][this.walk[i]];
+    // }
     
-    return len;
+    let sum = Array.apply(null, Array(this.numCar)).map(Number.prototype.valueOf,0);
+
+    let carIndex = 0
+    for(let i = 1; i < this.walk.length; i++) {
+      sum[carIndex] += distances[this.walk[i-1]][this.walk[i]];
+      if(this.walk[i-1] === 0 && this.walk[i] === 0)sum[carIndex] = 0
+      if(this.walk[i] === 0)carIndex++
+    }
+    //console.log(sum)
+    const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
+    let avg = average(sum);
+    return avg + Math.max.apply(null, sum)
+    //return Math.max.apply(null, sum);
   }
 
   layPheromones(pheromones) {
