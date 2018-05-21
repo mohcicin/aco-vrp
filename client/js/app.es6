@@ -128,6 +128,7 @@ function setProblemSelector() {
  * Starts the process!
  */
 function run() {
+  let numCar = parseInt(d3.select('.js-cars').property('value')) || 3; // number of cars
   let ants = parseInt(d3.select('.js-ants').property('value'), 10) || 20;
   let iterations = parseInt(d3.select('.js-iterations').property('value'), 10) || 100;
   let alpha = parseFloat(d3.select('.js-alpha').property('value')) || 1.0;
@@ -138,7 +139,7 @@ function run() {
 
   onIteration(0);
 
-  colony = new Colony(ants, iterations, tsp.distances, alpha, beta, pho, pheromones, Q);
+  colony = new Colony(ants, iterations, tsp.distances, alpha, beta, pho, pheromones, Q, numCar);
 
   display.clearBest();
   display.printSettings(colony);

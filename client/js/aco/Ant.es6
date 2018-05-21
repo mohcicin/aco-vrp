@@ -1,5 +1,5 @@
 class Ant {
-  constructor(alpha, beta, Q) {
+  constructor(alpha, beta, Q,numCar) {
     this.alpha = alpha;
     this.beta = beta;
     this.Q = Q || 1;
@@ -7,7 +7,8 @@ class Ant {
     this.base = 0;
     this.walk = [];
     this.walkLength = null;
-    this.numCar = 3;
+    this.numCar = numCar;
+
   }
 
   /**
@@ -101,12 +102,13 @@ class Ant {
     let carIndex = 0
     for(let i = 1; i < this.walk.length; i++) {
       sum[carIndex] += distances[this.walk[i-1]][this.walk[i]];
-      if(this.walk[i-1] === 0 && this.walk[i] === 0)sum[carIndex] = 0
+      if(this.walk[i-1] === 0 && this.walk[i] === 0)sum[carIndex] = 999
       if(this.walk[i] === 0)carIndex++
     }
     //console.log(sum)
     const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
     let avg = average(sum);
+
     return avg + Math.max.apply(null, sum)
     //return Math.max.apply(null, sum);
   }

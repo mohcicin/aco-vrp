@@ -4,7 +4,7 @@ import Ant from './Ant.es6';
 var TIMEOUT = 50;
 
 class Colony {
-  constructor(popSize, maxIterations, distances, alpha, beta, pho, ip, Q) {
+  constructor(popSize, maxIterations, distances, alpha, beta, pho, ip, Q, numCar) {
     this.popSize = popSize;
     this.maxIterations = maxIterations;
     this.distances = distances;
@@ -14,6 +14,7 @@ class Colony {
     this.pho = pho;
     this.Q = Q;
     this.ip = ip;
+    this.numCar = numCar
 
     this.population = [];
     this.pheromones = [];
@@ -39,7 +40,7 @@ class Colony {
     this.continue = true;
 
     for(let i = 0; i < this.popSize; i++) {
-      this.population[i] = new Ant(this.alpha, this.beta, this.Q);
+      this.population[i] = new Ant(this.alpha, this.beta, this.Q, this.numCar);
     }
 
     for(let x = 0; x < this.distances.length; x++) {
