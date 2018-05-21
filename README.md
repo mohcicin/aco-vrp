@@ -1,6 +1,6 @@
 # ACO-VRP
 
-ACO-VRP is a visual demo of Ant Colony Optimisation to solve Vehicle routing problem written in Javascript (ES6). It contains basic example of how ACO works given a randomly generated VRP. The basic parameters of the Ant System are available to be tuned.
+ACO-VRP is a visual demo of Ant Colony Optimization to solve Vehicle routing problem written in Javascript (ES6). It contains basic example of how ACO works given a randomly generated VRP. The basic parameters of the Ant System are available to be tuned.
 
 
 ## Screenshot
