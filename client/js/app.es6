@@ -130,7 +130,7 @@ function setProblemSelector() {
 function run() {
   let numCar = parseInt(d3.select('.js-cars').property('value')) || 2; // number of cars
   let ants = parseInt(d3.select('.js-ants').property('value'), 10) || 20;
-  let iterations = parseInt(d3.select('.js-iterations').property('value'), 10) || 100;
+  let iterations = parseInt(d3.select('.js-iterations').property('value'), 10) || 300;
   let alpha = parseFloat(d3.select('.js-alpha').property('value')) || 1.0;
   let beta = parseFloat(d3.select('.js-beta').property('value')) || 2.0;
   let pho = parseFloat(d3.select('.js-pho').property('value')) || 0.1;
