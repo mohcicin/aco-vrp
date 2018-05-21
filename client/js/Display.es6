@@ -68,21 +68,22 @@ class Display {
       .on('mouseover', function(d, i) {
         console.log(d, i);
       });
-    chart.select("circle").style("fill", "red").attr('r', 5 * factor)
+    chart.select("circle").style("fill", "darkred").attr('r', 5 * factor)
   }
 
   highlightOptimalWalk(walk) {
     let factor = this.max/this.height;
     var style = `stroke-width: ${2*factor}px; stroke-dasharray: ${3*factor}px ${5*factor}px`;
-    
+    let edgeColor = ["red","green","blue","orange","purple"]
     // Make sure existing walk is cleared
     this.clearHighlightedWalk();
-
+    let carIndex = 0
     for(let i = 1; i < walk.length; i++) {
       let edgeClass = '.e-' + walk[i-1] + '-' + walk[i];
       d3.select(edgeClass)
         .classed('bestWalkEdge', true)
-        .attr('style', style);
+        .attr('style', `stroke:${edgeColor[carIndex]};${style}`);
+      if(walk[i] == 0)carIndex++
     }
 
     let edgeClass = '.e-' + walk[walk.length-1] + '-' + walk[0];
