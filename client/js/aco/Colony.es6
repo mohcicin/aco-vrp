@@ -22,6 +22,7 @@ class Colony {
     this.continue = false;
 
     this.onNewBest = null;
+
   }
 
   setOnNewBest(onNewBest) {

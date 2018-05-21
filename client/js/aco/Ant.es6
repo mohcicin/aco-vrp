@@ -7,7 +7,13 @@ class Ant {
     this.base = 0;
     this.walk = [];
     this.walkLength = null;
+
+    //  numCar
     this.numCar = 3;
+
+    //  MIN-MAX
+    this.pheMin = 0.19;
+    this.pheMax = 0.9;
   }
 
   /**
@@ -115,6 +121,24 @@ class Ant {
     for(let i = 1; i < this.walk.length; i++) {
       pheromones[this.walk[i-1]][this.walk[i]] += (1/this.walkLength) * this.Q;
       pheromones[this.walk[i]][this.walk[i-1]] += (1/this.walkLength) * this.Q;
+      
+      if(pheromones[this.walk[i-1]][this.walk[i]] > this.pheMax){
+        pheromones[this.walk[i-1]][this.walk[i]] = this.pheMax;
+        if(pheromones[this.walk[i]][this.walk[i-1]] < this.pheMin){
+          pheromones[this.walk[i]][this.walk[i-1]] = this.pheMin
+        }else if(pheromones[this.walk[i]][this.walk[i-1]] > this.pheMax){
+          pheromones[this.walk[i]][this.walk[i-1]] = this.pheMax
+        }
+      }else if(pheromones[this.walk[i-1]][this.walk[i]] < this.pheMin){
+        pheromones[this.walk[i-1]][this.walk[i]] = this.pheMin;
+        if(pheromones[this.walk[i]][this.walk[i-1]] < this.pheMin){
+          pheromones[this.walk[i]][this.walk[i-1]] = this.pheMin
+        }else if(pheromones[this.walk[i]][this.walk[i-1]] > this.pheMax){
+          pheromones[this.walk[i]][this.walk[i-1]] = this.pheMax
+        }
+      }
+      // console.log(pheromones[this.walk[i-1]][this.walk[i]])
+      // console.log(pheromones[this.walk[i]][this.walk[i-1]])
     }
   }
 }
