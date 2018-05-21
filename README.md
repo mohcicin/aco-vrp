@@ -5,7 +5,7 @@ ACO-VRP is a visual demo of Ant Colony Optimisation to solve Vehicle routing pro
 
 ## Screenshot
 
-![JS-ACO Screenshot](http://i.imgur.com/WSlay5k.gif)
+![JS-ACO Screenshot](https://raw.githubusercontent.com/destine21/aco-vrp/master/ss.gif)
 
 
 ## Setup
