@@ -29,6 +29,8 @@ class Display {
     d3.select('.settings .pho .value').html(colony.pho);
     d3.select('.settings .pheromones .value').html(colony.ip);
     d3.select('.settings .Q .value').html(colony.Q);
+
+    d3.select('.settings .cars .value').html(colony.numCar);
   }
 
   /**

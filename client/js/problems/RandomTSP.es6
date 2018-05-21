@@ -1,6 +1,6 @@
 class RandomTSP {
   constructor(size, height, width, rng) {
-    this.name = 'Random TSP';
+    this.name = 'Random VRP';
     this.size = size;
     this.height = height;
     this.width = width;
