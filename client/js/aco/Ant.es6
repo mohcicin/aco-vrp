@@ -12,8 +12,8 @@ class Ant {
     this.numCar = 3;
 
     //  MIN-MAX
-    this.pheMin = 0.19;
-    this.pheMax = 0.9;
+    this.pheMin = 0.5;
+    this.pheMax = 1.0;
     this.numCar = numCar;
 
   }
@@ -123,23 +123,25 @@ class Ant {
   layPheromones(pheromones) {
     for(let i = 1; i < this.walk.length; i++) {
       pheromones[this.walk[i-1]][this.walk[i]] += (1/this.walkLength) * this.Q;
-      pheromones[this.walk[i]][this.walk[i-1]] += (1/this.walkLength) * this.Q;
-      
+
       if(pheromones[this.walk[i-1]][this.walk[i]] > this.pheMax){
-        pheromones[this.walk[i-1]][this.walk[i]] = this.pheMax;
-        if(pheromones[this.walk[i]][this.walk[i-1]] < this.pheMin){
-          pheromones[this.walk[i]][this.walk[i-1]] = this.pheMin
-        }else if(pheromones[this.walk[i]][this.walk[i-1]] > this.pheMax){
-          pheromones[this.walk[i]][this.walk[i-1]] = this.pheMax
-        }
+        pheromones[this.walk[i-1]][this.walk[i]] = this.pheMax
       }else if(pheromones[this.walk[i-1]][this.walk[i]] < this.pheMin){
-        pheromones[this.walk[i-1]][this.walk[i]] = this.pheMin;
-        if(pheromones[this.walk[i]][this.walk[i-1]] < this.pheMin){
-          pheromones[this.walk[i]][this.walk[i-1]] = this.pheMin
-        }else if(pheromones[this.walk[i]][this.walk[i-1]] > this.pheMax){
-          pheromones[this.walk[i]][this.walk[i-1]] = this.pheMax
-        }
+        pheromones[this.walk[i-1]][this.walk[i]] = this.pheMin
+        this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
       }
+    
+
+      pheromones[this.walk[i]][this.walk[i-1]] += (1/this.walkLength) * this.Q;
+
+      if(pheromones[this.walk[i]][this.walk[i-1]] > this.pheMax){
+        pheromones[this.walk[i]][this.walk[i-1]] = this.pheMax
+      }else if(pheromones[this.walk[i]][this.walk[i-1]] < this.pheMin){
+        pheromones[this.walk[i]][this.walk[i-1]] = this.pheMin
+        this.pheMax -= 1/pheromones[this.walk[i]][this.walk[i-1]];
+      }
+
+
       // console.log(pheromones[this.walk[i-1]][this.walk[i]])
       // console.log(pheromones[this.walk[i]][this.walk[i-1]])
     }

@@ -24,6 +24,15 @@ class Colony {
 
     this.onNewBest = null;
 
+    //  Best Iteration
+    this.bestIteration = 0;
+    
+    //  Best Global
+    this.bestGlobal = null;
+
+    //  Counter
+    this.mCounter = 0;
+
   }
 
   setOnNewBest(onNewBest) {
@@ -43,6 +52,7 @@ class Colony {
     for(let i = 0; i < this.popSize; i++) {
       this.population[i] = new Ant(this.alpha, this.beta, this.Q, this.numCar);
     }
+    this.bestGlobal = new Ant(this.alpha, this.beta, this.Q, this.numCar);
 
     for(let x = 0; x < this.distances.length; x++) {
       this.pheromones[x] = [];
@@ -63,6 +73,7 @@ class Colony {
         that.sendOutAnts();
         that.updatePheromones();
         x++;
+        this.mCounter++;
         that.daemonActions(x);
         if (x < that.maxIterations && that.continue) {
           doWork(x);
@@ -80,9 +91,27 @@ class Colony {
 
   updatePheromones() {
     this.evaporatePheromones();
-    for(let i = 0; i < this.popSize; i++) {
-      this.population[i].layPheromones(this.pheromones);
+    if(this.mCounter < 25){
+      if(getRandomInt(1, 10) > 3){
+        this.population[this.bestIteration].layPheromones(this.pheromones);
+      }else{
+        this.bestGlobal.layPheromones(this.pheromones);
+      }
+    }else{
+      if(getRandomInt(1, 10) < 3){
+        this.population[this.bestIteration].layPheromones(this.pheromones);
+      }else{
+        this.bestGlobal.layPheromones(this.pheromones);
+      }
     }
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+    // for(let i = 0; i < this.popSize; i++) {
+    //   this.population[i].layPheromones(this.pheromones);
+    // }
   }
 
   evaporatePheromones() {
@@ -102,6 +131,13 @@ class Colony {
         this.bestLength = _.clone(this.population[i].walkLength);
         if (this.onNewBest) {
           this.onNewBest(x, this.bestSolution, this.bestLength);
+          //  console.log(this.bestLength)
+          this.bestIteration = i
+          if(this.bestGlobal === 0){
+            this.bestGlobal = this.population[this.bestIteration];
+          }else if(this.bestLength < this.bestGlobal.walkLength){
+            this.bestGlobal = this.population[this.bestIteration]
+          }
         }
       }
     }
