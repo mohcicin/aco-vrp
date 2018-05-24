@@ -66,11 +66,12 @@ class Display {
       .attr('class', 'dot')
       .attr('cx', (d) => d[0])
       .attr('cy', (d) => d[1])
-      .attr('r', 3*factor)
+      .attr('r', 5*factor)
       .on('mouseover', function(d, i) {
         console.log(d, i);
-      });
-    chart.select("circle").style("fill", "darkred").attr('r', 5 * factor)
+      }).append("svg:title")
+      .text(function(d, i) { return i; });
+    chart.select("circle").style("fill", "darkred").attr('r', 7 * factor)
   }
 
   highlightOptimalWalk(walk) {
