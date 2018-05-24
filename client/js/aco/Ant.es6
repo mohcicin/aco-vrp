@@ -129,26 +129,19 @@ class Ant {
 
       if(pheromones[this.walk[i-1]][this.walk[i]] > this.pheMax){
         pheromones[this.walk[i-1]][this.walk[i]] = this.pheMax
-        this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
       }else if(pheromones[this.walk[i-1]][this.walk[i]] < this.pheMin){
         pheromones[this.walk[i-1]][this.walk[i]] = this.pheMin
         this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
       }
-      this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
-
-    
 
       pheromones[this.walk[i]][this.walk[i-1]] += (1/this.walkLength) * this.Q;
 
       if(pheromones[this.walk[i]][this.walk[i-1]] > this.pheMax){
         pheromones[this.walk[i]][this.walk[i-1]] = this.pheMax
-        this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
-
       }else if(pheromones[this.walk[i]][this.walk[i-1]] < this.pheMin){
         pheromones[this.walk[i]][this.walk[i-1]] = this.pheMin
         this.pheMax -= 1/pheromones[this.walk[i]][this.walk[i-1]];
       }
-      this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
 
 
 
