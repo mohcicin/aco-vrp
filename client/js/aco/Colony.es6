@@ -105,8 +105,7 @@ class Colony {
       }
     }
     for(let i = 0; i < this.popSize; i++) {
-      //console.log('Ant', i, this.population[i]);
-      this.population[i].doWalk(this.distances, this.pheromones);
+      this.population[i].layPheromones(this.pheromones);
     }
 
     function getRandomInt(min, max) {
