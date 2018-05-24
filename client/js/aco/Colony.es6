@@ -92,17 +92,21 @@ class Colony {
   updatePheromones() {
     this.evaporatePheromones();
     if(this.mCounter < 25){
-      if(getRandomInt(1, 10) > 3){
+      if(getRandomInt(1, 10) > 4){
         this.population[this.bestIteration].layPheromones(this.pheromones);
       }else{
         this.bestGlobal.layPheromones(this.pheromones);
       }
     }else{
-      if(getRandomInt(1, 10) < 3){
+      if(getRandomInt(1, 10) < 4){
         this.population[this.bestIteration].layPheromones(this.pheromones);
       }else{
         this.bestGlobal.layPheromones(this.pheromones);
       }
+    }
+    for(let i = 0; i < this.popSize; i++) {
+      //console.log('Ant', i, this.population[i]);
+      this.population[i].doWalk(this.distances, this.pheromones);
     }
 
     function getRandomInt(min, max) {
