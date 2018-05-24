@@ -113,14 +113,13 @@ class Ant {
       if(this.walk[i] === 0)carIndex++
     }
     //console.log(sum)
-    const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
-    let avg = average(sum);
+    const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length
     const allSum = arr => arr.reduce( ( p, c ) => p + c, 0 );
     let allSums = allSum(sum) 
-
-    return avg + Math.max.apply(null, sum)
-    //return Math.max.apply(null, sum);
-    //return allSums + avg + Math.max.apply(null, sum);
+    let avg = allSums / sum.length
+    let max = Math.max.apply(null, sum);
+    
+    return avg + max
   }
 
   layPheromones(pheromones) {
