@@ -70,7 +70,7 @@ class Display {
       .on('mouseover', function(d, i) {
         console.log(d, i);
       }).append("svg:title")
-      .text(function(d, i) { return i; });
+      .text(function(d, i) { return i+1; });
     chart.select("circle").style("fill", "darkred").attr('r', 7 * factor)
   }
 
