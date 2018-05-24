@@ -139,7 +139,7 @@ class Colony {
         this.bestSolution = _.cloneDeep(this.population[i].walk);
         this.bestLength = _.clone(this.population[i].walkLength);
         if (this.onNewBest) {
-          this.onNewBest(x, this.bestSolution, this.bestLength);
+          this.onNewBest(x, this.bestSolution, this.population[i].sumAllPath);
           //  console.log(this.bestLength)
           this.bestIteration = i
           if(this.bestGlobal === 0){

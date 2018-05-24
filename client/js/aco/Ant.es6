@@ -8,6 +8,7 @@ class Ant {
     this.walk = [];
     this.walkLength = null;
 
+    this.sumAllPath = 0;
     //  numCar
     this.numCar = 3;
 
@@ -119,6 +120,7 @@ class Ant {
     let avg = allSums / sum.length
     let max = Math.max.apply(null, sum);
     
+    this.sumAllPath = allSums;
     return avg + max
   }
 
