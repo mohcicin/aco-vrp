@@ -104,9 +104,15 @@ class Colony {
         this.bestGlobal.layPheromones(this.pheromones);
       }
     }
-    for(let i = 0; i < this.popSize; i++) {
-      this.population[i].layPheromones(this.pheromones);
-    }
+
+    // for(let i = 0; i < this.popSize; i++) {
+    //   this.population[i].layPheromones(this.pheromones);
+    // }
+
+    // for(let i = 0; i < this.popSize; i++) {
+    //   //console.log('Ant', i, this.population[i]);
+    //   this.population[i].doWalk(this.distances, this.pheromones);
+    // }
 
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;

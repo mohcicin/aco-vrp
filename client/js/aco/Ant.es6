@@ -116,11 +116,11 @@ class Ant {
     const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
     let avg = average(sum);
     const allSum = arr => arr.reduce( ( p, c ) => p + c, 0 );
-    let allSum = allSum(sum) 
+    let allSums = allSum(sum) 
 
-    //return avg + Math.max.apply(null, sum)
-    return Math.max.apply(null, sum);
-    //return allSum + avg + Math.max.apply(null, sum);
+    return avg + Math.max.apply(null, sum)
+    //return Math.max.apply(null, sum);
+    //return allSums + avg + Math.max.apply(null, sum);
   }
 
   layPheromones(pheromones) {
@@ -129,20 +129,27 @@ class Ant {
 
       if(pheromones[this.walk[i-1]][this.walk[i]] > this.pheMax){
         pheromones[this.walk[i-1]][this.walk[i]] = this.pheMax
+        this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
       }else if(pheromones[this.walk[i-1]][this.walk[i]] < this.pheMin){
         pheromones[this.walk[i-1]][this.walk[i]] = this.pheMin
         this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
-      }7
+      }
+      this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
+
     
 
       pheromones[this.walk[i]][this.walk[i-1]] += (1/this.walkLength) * this.Q;
 
       if(pheromones[this.walk[i]][this.walk[i-1]] > this.pheMax){
         pheromones[this.walk[i]][this.walk[i-1]] = this.pheMax
+        this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
+
       }else if(pheromones[this.walk[i]][this.walk[i-1]] < this.pheMin){
         pheromones[this.walk[i]][this.walk[i-1]] = this.pheMin
         this.pheMax -= 1/pheromones[this.walk[i]][this.walk[i-1]];
       }
+      this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
+
 
 
       // console.log(pheromones[this.walk[i-1]][this.walk[i]])
