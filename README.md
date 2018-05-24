@@ -17,3 +17,5 @@ ACO-VRP is a visual demo of Ant Colony Optimization to solve Vehicle routing pro
  - `npm start`
  - `npm run develop` // for development
  - Go to `http://localhost:8080`
+
+##Edited from https://github.com/GordyD/js-aco
