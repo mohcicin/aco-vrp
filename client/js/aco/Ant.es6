@@ -9,13 +9,13 @@ class Ant {
     this.walkLength = null;
 
     this.sumAllPath = 0;
-    //  numCar
-    this.numCar = 3;
+    this.numCar = numCar;
+    this.capacity = 10;   //init capacity +++++++++++++
 
     //  MIN-MAX
     this.pheMin = 0.3;
     this.pheMax = 0.9;
-    this.numCar = numCar;
+
 
   }
 
@@ -40,23 +40,25 @@ class Ant {
     this.walkLength = null;
     let count = 0;
 
+    this.capacity = distances.length/this.numCar + 1    // auto adjust capacity ++++++++++++++++++++++++++++++++++++
+    let visitCount = Array.apply(null, Array(this.numCar)).map(Number.prototype.valueOf,0);
+
     for(let i = 1; i < distances.length + this.numCar - 1; i++) {
-      let next =  this.chooseNext(this.walk[i - 1], distances, pheromones,count);
+      let next ;
+      if(visitCount[count] < this.capacity){
+        next =  this.chooseNext(this.walk[i - 1], distances, pheromones,count);
+      }else{
+        next =  0;
+      }
       if(next === 0 ){count++;}
+      visitCount[count]++;
       this.walk.push(next);
      }
     //stang add this
     this.walk.push(this.walk[0])
     //console.log([this.walk.length,this.walk])
-    // if(this.walk[distances.length + this.numCar - 2] == 0){
-    //   this.walk.push(this.walk[0])
-    // }
     this.walkLength = this.calculateWalkLength(distances);
-    // try{
-    //    this.walkLength = this.calculateWalkLength(distances);
-    // }catch(err){
-    //   this.walkLength = 999999
-    // }
+
 
   }
  
@@ -110,7 +112,7 @@ class Ant {
     let carIndex = 0
     for(let i = 1; i < this.walk.length; i++) {
       sum[carIndex] += distances[this.walk[i-1]][this.walk[i]];
-      if(this.walk[i-1] === 0 && this.walk[i] === 0)sum[carIndex] = 999
+      if(this.walk[i-1] === 0 && this.walk[i] === 0)sum[carIndex] = 99999
       if(this.walk[i] === 0)carIndex++
     }
     //console.log(sum)
@@ -123,7 +125,7 @@ class Ant {
     
     this.sumAllPath = allSums;
     //return max - min
-    return avg + max*3
+    return max + avg
   }
   StandardDeviation(numbersArr) {
     //--CALCULATE AVAREGE--
