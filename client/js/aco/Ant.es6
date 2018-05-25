@@ -13,7 +13,7 @@ class Ant {
     this.numCar = 3;
 
     //  MIN-MAX
-    this.pheMin = 0.1;
+    this.pheMin = 0.3;
     this.pheMax = 0.9;
     this.numCar = numCar;
 
@@ -119,35 +119,59 @@ class Ant {
     let allSums = allSum(sum) 
     let avg = allSums / sum.length
     let max = Math.max.apply(null, sum);
+    let min = Math.min.apply(null, sum);
     
     this.sumAllPath = allSums;
-    return avg + max
+    //return max - min
+    return avg + max*3
   }
+  StandardDeviation(numbersArr) {
+    //--CALCULATE AVAREGE--
+    var total = 0;
+    for(var key in numbersArr) 
+       total += numbersArr[key];
+    var meanVal = total / numbersArr.length;
+    //--CALCULATE AVAREGE--
+  
+    //--CALCULATE STANDARD DEVIATION--
+    var SDprep = 0;
+    for(var key in numbersArr) 
+       SDprep += Math.pow((parseFloat(numbersArr[key]) - meanVal),2);
+    var SDresult = Math.sqrt(SDprep/numbersArr.length);
+    //--CALCULATE STANDARD DEVIATION--
+    return (SDresult);
+    
+}
+  // layPheromones(pheromones) {
+  //   for(let i = 1; i < this.walk.length; i++) {
+  //     pheromones[this.walk[i-1]][this.walk[i]] += (1/this.walkLength) * this.Q;
 
+  //     if(pheromones[this.walk[i-1]][this.walk[i]] > this.pheMax){
+  //       pheromones[this.walk[i-1]][this.walk[i]] = this.pheMax
+  //     }else if(pheromones[this.walk[i-1]][this.walk[i]] < this.pheMin){
+  //       pheromones[this.walk[i-1]][this.walk[i]] = this.pheMin
+  //       this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
+  //     }
+
+  //     pheromones[this.walk[i]][this.walk[i-1]] += (1/this.walkLength) * this.Q;
+
+  //     if(pheromones[this.walk[i]][this.walk[i-1]] > this.pheMax){
+  //       pheromones[this.walk[i]][this.walk[i-1]] = this.pheMax
+  //     }else if(pheromones[this.walk[i]][this.walk[i-1]] < this.pheMin){
+  //       pheromones[this.walk[i]][this.walk[i-1]] = this.pheMin
+  //       this.pheMax -= 1/pheromones[this.walk[i]][this.walk[i-1]];
+  //     }
+
+
+
+  //     // console.log(pheromones[this.walk[i-1]][this.walk[i]])
+  //     // console.log(pheromones[this.walk[i]][this.walk[i-1]])
+  //   }
+  //  }
   layPheromones(pheromones) {
     for(let i = 1; i < this.walk.length; i++) {
       pheromones[this.walk[i-1]][this.walk[i]] += (1/this.walkLength) * this.Q;
-
-      if(pheromones[this.walk[i-1]][this.walk[i]] > this.pheMax){
-        pheromones[this.walk[i-1]][this.walk[i]] = this.pheMax
-      }else if(pheromones[this.walk[i-1]][this.walk[i]] < this.pheMin){
-        pheromones[this.walk[i-1]][this.walk[i]] = this.pheMin
-        this.pheMax -= 1/pheromones[this.walk[i-1]][this.walk[i]];
-      }
-
       pheromones[this.walk[i]][this.walk[i-1]] += (1/this.walkLength) * this.Q;
-
-      if(pheromones[this.walk[i]][this.walk[i-1]] > this.pheMax){
-        pheromones[this.walk[i]][this.walk[i-1]] = this.pheMax
-      }else if(pheromones[this.walk[i]][this.walk[i-1]] < this.pheMin){
-        pheromones[this.walk[i]][this.walk[i-1]] = this.pheMin
-        this.pheMax -= 1/pheromones[this.walk[i]][this.walk[i-1]];
-      }
-
-
-
-      // console.log(pheromones[this.walk[i-1]][this.walk[i]])
-      // console.log(pheromones[this.walk[i]][this.walk[i-1]])
     }
   }
 }
