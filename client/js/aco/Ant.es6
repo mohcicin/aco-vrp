@@ -10,7 +10,7 @@ class Ant {
 
     this.sumAllPath = 0;
     this.numCar = numCar;
-    this.capacity = 10;   //init capacity +++++++++++++
+    this.capacity = 100;   //init capacity +++++++++++++
 
     //  MIN-MAX
     this.pheMin = 0.3;
@@ -40,7 +40,8 @@ class Ant {
     this.walkLength = null;
     let count = 0;
 
-    this.capacity = distances.length/this.numCar + 1    // auto adjust capacity ++++++++++++++++++++++++++++++++++++
+    // auto adjust capacity +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    this.capacity = distances.length/2    //comment this line to disable capacity
     let visitCount = Array.apply(null, Array(this.numCar)).map(Number.prototype.valueOf,0);
 
     for(let i = 1; i < distances.length + this.numCar - 1; i++) {
@@ -125,7 +126,7 @@ class Ant {
     
     this.sumAllPath = allSums;
     //return max - min
-    return max + avg
+    return allSums + this.StandardDeviation(sum) * 2
   }
   StandardDeviation(numbersArr) {
     //--CALCULATE AVAREGE--
